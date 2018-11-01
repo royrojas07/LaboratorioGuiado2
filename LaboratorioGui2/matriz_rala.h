@@ -78,17 +78,29 @@ itr_matriz_rala< T > matriz_rala< T >::itr_end;
 
 template < typename T >
 matriz_rala< T >::matriz_rala() {
-
+    filas.reserve(20);
+    for(int i=0;i<20;i++){
+       filas.push_back(fila_rala< T > i);
+    }
 }
 
 template < typename T >
 matriz_rala< T >::matriz_rala(int cf, int cc) {
-
+    int fil=cf;
+    int col=cc;
+    filas.reserve(20);
+    for(int i=0;i<fil;i++){
+       filas.push_back(fila_rala< T > i(col));
+    }
 }
 
 template < typename T >
 matriz_rala< T >::matriz_rala(const matriz_rala< T >& mr_orig) {
-
+    int p= mr_orig.filas.size();
+    filas.reserve(p);
+    for(int i=0;i<p;i++){        
+        filas.push_back(fila_rala< T > i(mr_orig.filas[i]));
+    }
 }
 
 template < typename T >
