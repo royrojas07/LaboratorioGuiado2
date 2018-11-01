@@ -102,7 +102,7 @@ fila_rala< T >::fila_rala(const fila_rala< T >& fr_orig) {
         shared_ptr<elem<T>> agregado = inicio;
         shared_ptr<elem<T>> porAgregar = fr_orig.inicio->sgt;
         while( porAgregar ){
-            agregado->sgt = shared_ptr<elem<T>>(new elem<T>( *fr_orig.inicio ));
+            agregado->sgt = shared_ptr<elem<T>>(new elem<T>( *porAgregar ));
             porAgregar = porAgregar->sgt;
             agregado = agregado->sgt;
         }
