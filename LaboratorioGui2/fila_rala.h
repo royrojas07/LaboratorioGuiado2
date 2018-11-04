@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef FILA_RALA_H
+#define FILA_RALA_H
 #include  <stdexcept> // para usar excepciones de tipo "out_of_range".
 #include <memory>
 #include <sstream>
@@ -202,3 +202,4 @@ void fila_rala< T >::insertar(int c, const T& t) throw (out_of_range) {
     }
 }
  
+#endif

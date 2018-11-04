@@ -33,7 +33,7 @@
   <confs>
     <conf name="Debug" type="1">
       <toolsSet>
-        <compilerSet>MinGW_TDM|MinGW_TDM</compilerSet>
+        <compilerSet>MinGW_TDM_1|MinGW_TDM</compilerSet>
         <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>

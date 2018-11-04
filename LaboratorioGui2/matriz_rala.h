@@ -1,9 +1,11 @@
-#pragma once
+#ifndef MATRIZ_RALA_H
+#define MATRIZ_RALA_H
 #include <stdexcept> // para usar excepciones de tipo "out_of_range".
 #include <vector>
 using namespace std;
 
 #include "fila_rala.h"
+#include "itr_matriz_rala.h"
 
 template < typename T >
 class itr_matriz_rala;
@@ -80,17 +82,17 @@ template < typename T >
 matriz_rala< T >::matriz_rala() {
     filas.reserve(20);
     for(int i=0;i<20;i++){
-       filas.push_back(fila_rala< T > i);
+        fila_rala< T > fila;
+        filas.push_back( fila );
     }
 }
 
 template < typename T >
 matriz_rala< T >::matriz_rala(int cf, int cc) {
-    int fil=cf;
-    int col=cc;
     filas.reserve(20);
-    for(int i=0;i<fil;i++){
-       filas.push_back(fila_rala< T > i(col));
+    for( int i = 0; i < cf; i++ ){
+        fila_rala< T > fila(cc);
+        filas.push_back( fila );
     }
 }
 
@@ -98,8 +100,9 @@ template < typename T >
 matriz_rala< T >::matriz_rala(const matriz_rala< T >& mr_orig) {
     int p= mr_orig.filas.size();
     filas.reserve(p);
-    for(int i=0;i<p;i++){        
-        filas.push_back(fila_rala< T > i(mr_orig.filas[i]));
+    for(int i=0;i<p;i++){
+        fila_rala< T > fila( mr_orig.filas[i] );
+        filas.push_back( fila );
     }
 }
 
@@ -109,30 +112,45 @@ matriz_rala< T >::~matriz_rala() {
 
 template < typename T >
 const fila_rala< T >& matriz_rala< T >::operator[](int f) const throw (out_of_range) {
-
+    int fila = f;
+    int cant = obtCF();
+    if(0>fila || cant<=fila){
+        throw std::out_of_range("out_of_range");
+    }else{
+        return filas[fila];
+    }
 }
 
 template < typename T >
 fila_rala< T >& matriz_rala< T >::operator[](int f) throw (out_of_range) {
-
+    int fila=f;
+    int cant = obtCF();
+    if( 0 > fila || cant <= fila){
+        throw std::out_of_range("out_of_range");
+    }else{
+        return filas[fila];
+    }
 }
 
 template < typename T >
 int matriz_rala< T >::obtCF() const {
-
+    return filas.size();
 }
 
 template < typename T >
 int matriz_rala< T >::obtCC() const {
-
+    return filas[0].cc;
 }
 
 template < typename T >
 itr_matriz_rala< T >& matriz_rala< T >::begin() {
-
+    itr_begin.asg_matriz_rala( *this );
+    return itr_begin;
 }
 
 template < typename T >
 itr_matriz_rala< T >& matriz_rala< T >::end() {
-
+    return itr_end;
 }
+
+#endif
