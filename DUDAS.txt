@@ -1,4 +1,6 @@
-El operator= en iterador debería ser const?
-Razón de ser de los iteradores estáticos en la matriz.
+El operator= en iterador deberÃ­a ser const?
+RazÃ³n de ser de los iteradores estÃ¡ticos en la matriz.
 Comparaciones de operator== en iterador.
 Se puede const_iterator en matriz_rala::begin() y matriz_rala::end()?
+como?
+Jajaja esto es para recordar dudas, preguntas para el profe
