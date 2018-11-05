@@ -21,7 +21,7 @@ public:
     itr_matriz_rala< T >& operator++();
     bool operator==(const itr_matriz_rala< T >& orig) const;
     bool operator!=(const itr_matriz_rala< T >& orig) const;
-    itr_matriz_rala< T >& operator=(const itr_matriz_rala< T >& orig) const;
+    itr_matriz_rala< T >& operator=(const itr_matriz_rala< T >& orig);
 
     /* OBTENEDORES ESPEC�FICOS */
     int obtFila();
@@ -89,7 +89,12 @@ itr_matriz_rala< T >& itr_matriz_rala< T >::operator++() {
 
 template < typename T >
 bool itr_matriz_rala< T >::operator==(const itr_matriz_rala< T >& orig) const {
-    return (p_elem_act->c == orig.p_elem_act->c) && (p_elem_act->v == orig.p_elem_act->v);
+    if( p_elem_act && orig.p_elem_act )
+        return (p_elem_act->c == orig.p_elem_act->c) && (p_elem_act->v == orig.p_elem_act->v);
+    else if( !p_elem_act && !orig.p_elem_act )
+        return true;
+    else
+        return false;
     //return &(p_elem_act->v) == &(p_elem_act->v);
 }
 
@@ -99,7 +104,7 @@ bool itr_matriz_rala< T >::operator!=(const itr_matriz_rala< T >& orig) const {
 }
 
 template < typename T >
-itr_matriz_rala< T >& itr_matriz_rala< T >::operator=(const itr_matriz_rala< T >& orig) const {
+itr_matriz_rala< T >& itr_matriz_rala< T >::operator=(const itr_matriz_rala< T >& orig){
     p_elem_act = orig.p_elem_act;
     mr = orig.mr;
     f_act = orig.f_act;

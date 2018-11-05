@@ -115,41 +115,32 @@ fila_rala< T >::~fila_rala() {
 
 template < typename T >
 const T fila_rala< T >::operator[](int c) const throw (out_of_range) {
-    int col=c;
-    int valor=0;
-    shared_ptr< elem< T > > iterando;
-    if (col >= this->cc){
-        throw std::out_of_range("indice no válido");
-    }else{
-        iterando=inicio;
-        while(iterando!=nullptr){
-            if(iterando->c==col){
-                return iterando->v;
-                iterando=nullptr;
-            }else{
-                iterando=iterando->sgt;
-            }
-        }
+    T retorno;
+    shared_ptr< elem< T > > iterando = inicio;
+    if( c >= cc || c < 0 ){
+        throw out_of_range("Indice no válido.");
+    } else {
+        while( iterando && iterando->c != c )
+            iterando = iterando->sgt;
     }
+    if( iterando )
+        retorno = iterando->v;
+    return retorno;
 }
 
 template < typename T >
 T& fila_rala< T >::operator[](int c) throw (out_of_range) {
-    int col=c;
-        shared_ptr< elem< T > > iterando;
-        if (col>=this->cc){
-            throw std::out_of_range("indice no válido");
-        }else{
-            iterando=inicio;
-            while(iterando!=nullptr){
-                if(iterando->c==col){
-                    return iterando->v;
-                    iterando=nullptr;
-                }else{
-                    iterando=iterando->sgt;
-                }
-            }
-        }
+    shared_ptr< elem< T > > iterando = inicio;
+    if ( c >= this->cc || c < 0 ){
+        throw out_of_range( "Indice no válido." );
+    }else{
+        while( iterando && iterando->c != c )
+            iterando = iterando->sgt;
+        if( !iterando )
+            throw out_of_range( "La posición c no existe." );
+        else
+            return iterando->v;
+    }
 }
 
 template < typename T >

@@ -80,8 +80,10 @@ itr_matriz_rala< T > matriz_rala< T >::itr_end;
 
 template < typename T >
 matriz_rala< T >::matriz_rala() {
-    filas.reserve(20);
-    for(int i=0;i<20;i++){
+    cf = 20;
+    cc = 10;
+    filas.reserve(cf);
+    for( int i = 0; i < cf; i++ ){
         fila_rala< T > fila;
         filas.push_back( fila );
     }
@@ -89,7 +91,9 @@ matriz_rala< T >::matriz_rala() {
 
 template < typename T >
 matriz_rala< T >::matriz_rala(int cf, int cc) {
-    filas.reserve(20);
+    this->cc = cc;
+    this->cf = cf;
+    filas.reserve(cf);
     for( int i = 0; i < cf; i++ ){
         fila_rala< T > fila(cc);
         filas.push_back( fila );
@@ -97,10 +101,11 @@ matriz_rala< T >::matriz_rala(int cf, int cc) {
 }
 
 template < typename T >
-matriz_rala< T >::matriz_rala(const matriz_rala< T >& mr_orig) {
-    int p= mr_orig.filas.size();
-    filas.reserve(p);
-    for(int i=0;i<p;i++){
+matriz_rala< T >::matriz_rala(const matriz_rala< T >& mr_orig){
+    this->cf = mr_orig.obtCF();
+    this->cc = mr_orig.obtCC();
+    filas.reserve(cf);
+    for( int i = 0; i < cf; i++ ){
         fila_rala< T > fila( mr_orig.filas[i] );
         filas.push_back( fila );
     }
@@ -112,34 +117,30 @@ matriz_rala< T >::~matriz_rala() {
 
 template < typename T >
 const fila_rala< T >& matriz_rala< T >::operator[](int f) const throw (out_of_range) {
-    int fila = f;
-    int cant = obtCF();
-    if(0>fila || cant<=fila){
-        throw std::out_of_range("out_of_range");
+    if( 0 > f || cf <= f ){
+        throw out_of_range( "Indice no válido." );
     }else{
-        return filas[fila];
+        return filas[f];
     }
 }
 
 template < typename T >
 fila_rala< T >& matriz_rala< T >::operator[](int f) throw (out_of_range) {
-    int fila=f;
-    int cant = obtCF();
-    if( 0 > fila || cant <= fila){
-        throw std::out_of_range("out_of_range");
+    if( 0 > f || cf <= f ){
+        throw out_of_range( "Indice no válido." );
     }else{
-        return filas[fila];
+        return filas[f];
     }
 }
 
 template < typename T >
 int matriz_rala< T >::obtCF() const {
-    return filas.size();
+    return cf;
 }
 
 template < typename T >
 int matriz_rala< T >::obtCC() const {
-    return filas[0].cc;
+    return cc;
 }
 
 template < typename T >

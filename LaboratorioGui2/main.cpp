@@ -17,8 +17,6 @@ using namespace std;
 
 #include "matriz_rala.h"
 #include "itr_matriz_rala.h"
-#include "itr_matriz_rala.h"
-
 
 // "%TEST_FAILED% testname = testMatriz_rala() message = "
 
@@ -294,29 +292,29 @@ void testItr_matriz_rala() {
 
 
 int main(int argc, char** argv) {
-//    std::cout << "%SUITE_STARTED% pruebas" << std::endl;
-//
-//    std::cout << "%TEST_STARTED% testMatriz_rala" << std::endl;
-//    testMatriz_rala();
-//    std::cout << "%TEST_FINISHED% testMatriz_rala" << std::endl;
-//
-//    std::cout << "%TEST_STARTED% testMatriz_rala2" << std::endl;
-//    testMatriz_rala2();
-//    std::cout << "%TEST_FINISHED% testMatriz_rala2" << std::endl;
-//
-//    std::cout << "%TEST_STARTED% testMatriz_rala3" << std::endl;
-//    testMatriz_rala3();
-//    std::cout << "%TEST_FINISHED% testMatriz_rala3" << std::endl;
-//
-//    std::cout << "%TEST_STARTED% testMatriz_rala_insertar" << std::endl;
-//    testMatriz_rala_insertar();
-//    std::cout << "%TEST_FINISHED% testMatriz_rala_insertar" << std::endl;
-//
-//    std::cout << "%TEST_STARTED% testItr_matriz_rala" << std::endl;
-//    testItr_matriz_rala();
-//    std::cout << "%TEST_FINISHED% testItr_matriz_rala" << std::endl;
-//
-//    std::cout << "%SUITE_FINISHED% pruebas" << std::endl;
+    std::cout << "%SUITE_STARTED% pruebas" << std::endl;
+
+    std::cout << "%TEST_STARTED% testMatriz_rala" << std::endl;
+    testMatriz_rala();
+    std::cout << "%TEST_FINISHED% testMatriz_rala" << std::endl;
+
+    std::cout << "%TEST_STARTED% testMatriz_rala2" << std::endl;
+    testMatriz_rala2();
+    std::cout << "%TEST_FINISHED% testMatriz_rala2" << std::endl;
+
+    std::cout << "%TEST_STARTED% testMatriz_rala3" << std::endl;
+    testMatriz_rala3();
+    std::cout << "%TEST_FINISHED% testMatriz_rala3" << std::endl;
+
+    std::cout << "%TEST_STARTED% testMatriz_rala_insertar" << std::endl;
+    testMatriz_rala_insertar();
+    std::cout << "%TEST_FINISHED% testMatriz_rala_insertar" << std::endl;
+
+    std::cout << "%TEST_STARTED% testItr_matriz_rala" << std::endl;
+    testItr_matriz_rala();
+    std::cout << "%TEST_FINISHED% testItr_matriz_rala" << std::endl;
+
+    std::cout << "%SUITE_FINISHED% pruebas" << std::endl;
     
     return (EXIT_SUCCESS);
 }
