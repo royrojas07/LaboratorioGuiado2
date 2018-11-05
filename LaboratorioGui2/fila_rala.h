@@ -145,52 +145,101 @@ T& fila_rala< T >::operator[](int c) throw (out_of_range) {
 
 template < typename T >
 void fila_rala< T >::insertar(int c, const T& t) throw (out_of_range) {
-    shared_ptr< elem< T > > iterando;
-    shared_ptr< elem< T > > p;
-    int cor=0;
-    int col=c;
-    bool entro=false;
-    iterando=inicio;
-    shared_ptr< elem< T > > temporal;
-     if (inicio == 0){ // se agrega el primer elemento a *this
-        inicio = shared_ptr< elem< T > >(new elem< T >(col));
-        inicio->v=t;
-     }else if(iterando->c>col){ //se agrega al principio
-        temporal=shared_ptr< elem< T > >(new elem< T >(col));
-        temporal->sgt=inicio;
-        temporal->v=t;
-        inicio=temporal;
-    }else{
-        while(iterando!=nullptr){
-            if(iterando->c==col){
-              throw std::out_of_range("columna ya existe");
-              iterando=nullptr;
-              cor=1;
-            }else{
-                if(iterando->c<col){
-                  temporal=iterando;
-                  entro=true;
-                  iterando=iterando->sgt;
-                }else if(iterando->c>col && entro==false){
-                    temporal=iterando;
-                    iterando=nullptr;
-                }else if(iterando->c>col && entro==true){
-                iterando=nullptr;
+    shared_ptr<elem<T>> iterador = inicio;
+    if( c < 0 || c >= cc ){
+        throw out_of_range( "El posición c es inválida!" );
+    } else {
+        if( !inicio ){
+            inicio = shared_ptr<elem<T>>( new elem<T>(c) );
+            inicio->v = t;
+        } else {
+            bool yaExiste = false;
+            shared_ptr<elem<T>> ant = iterador;
+            while( iterador && iterador->c <= c ){
+                ant = iterador;
+                if( iterador->c == c )
+                    yaExiste = true;
+                iterador = iterador->sgt;
+            }
+            if( !yaExiste ){
+                if( inicio->c > c ){
+                    inicio = shared_ptr<elem<T>>( new elem<T>(c) );
+                    inicio->v = t;
+                    inicio->sgt = ant;
+                    ant->ant = inicio;
+                } else {
+                    ant->sgt = shared_ptr<elem<T>>( new elem<T>(c) );
+                    ant->sgt->v = t;
+                    ant->sgt->ant = ant;
+                    if( iterador )
+                        ant->sgt->sgt = iterador;
                 }
+            } else {
+                throw out_of_range( "La columna c ya existe!" );
             }
         }
-        if(entro==true){
-            p=temporal->sgt;
-            temporal->sgt=shared_ptr< elem< T > >(new elem< T >(col));
-            temporal->sgt->v=t;
-            temporal->sgt->sgt=p;
-            temporal->sgt->ant=temporal;
-        }else if(entro==false && cor==0 ){
-            temporal->sgt=shared_ptr< elem< T > >(new elem< T >(col));
-            temporal->sgt->v=t;
-            temporal->sgt->ant=temporal;
-        }
     }
+//    int cl=c;
+//    bool entro=false;
+//    bool ultim=false;
+//    int bandCas=0;
+//    //EL QUE VA RECORRIENDO LA FILA PARA COMPARAR
+//    shared_ptr<elem<T>>iterando;
+//    //GUARDA LA CADENA PARA LUEGO VOLVER A UNIRLA
+//    shared_ptr<elem<T>>temporal;
+//    //CASO #1 SALE DEL RANGO
+//    if(cl>=this->cc){
+//        throw std::out_of_range("fila se salió del rango");
+//        bandCas=1;
+//    }
+//    //CASO #2 LA FILA ESTA VACÍA
+//    else if (inicio==0){
+//        inicio=shared_ptr<elem<T>>(new elem<T>(cl));
+//        inicio->v=t;
+//        bandCas=1;
+//    }
+//    //CASO #3 DEBE SER EL PRIMER ELEMENTO
+//    else if(inicio->c>cl){
+//        temporal=inicio;
+//        inicio=shared_ptr<elem<T>>(new elem<T>(cl));
+//        inicio->v=t;
+//        inicio->sgt=temporal;
+//        temporal->ant=inicio;
+//        bandCas=1;
+//    }
+//    else if(bandCas==0){
+//        iterando=inicio;
+//        while(iterando!=nullptr){
+//            //CASO #4 LA COLUMNA YA EXISTE
+//            if(cl==iterando->c){
+//               throw std::out_of_range("La columna ya existe");
+//            }else{
+//                if(cl>iterando->c){
+//                    temporal=iterando;
+//                    iterando=iterando->sgt;
+//                    entro=true;
+//                    if(iterando==nullptr){ //CASO #5 ÚLTIMO ELEMENTO
+//                        ultim=true;
+//                    }
+//                }
+//                else if(cl<iterando->c && entro==true){
+//                    iterando=nullptr;
+//                }
+//            }
+//        }
+//        if(ultim==false){ //AQUÍ SE AGREGA EN MEDIO
+//            iterando=temporal->sgt;
+//            temporal->sgt=shared_ptr<elem<T>>(new elem<T>(cl));
+//            temporal->sgt->v=t;
+//            temporal->sgt->ant=temporal;
+//            temporal->sgt->sgt=iterando;
+//            iterando->ant=temporal->sgt;
+//        }else if(ultim==true){ //AQUÍ SE AGREGA AL FINAL
+//            temporal->sgt=shared_ptr<elem<T>>(new elem<T>(cl));
+//            temporal->sgt->v=t;
+//            temporal->sgt->ant=temporal;
+//        }
+//    }
 }
  
 #endif
