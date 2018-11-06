@@ -69,9 +69,9 @@ T& itr_matriz_rala< T >::operator*() {
 
 template < typename T >
 T* itr_matriz_rala< T >::operator->() {
-    T* valor = 0;
+    T * valor = 0;
     if( p_elem_act )
-        T* valor = p_elem_act->v;
+        valor = &p_elem_act->v;
     return valor;
 }
 
@@ -82,7 +82,8 @@ itr_matriz_rala< T >& itr_matriz_rala< T >::operator++() {
         c_act = p_elem_act->c;
     } else if( p_elem_act ){
         p_elem_act = obtSgtFilaRalaNoVacia( mr, f_act );
-        c_act = p_elem_act->c;
+        if( p_elem_act )
+            c_act = p_elem_act->c;
     }
     return *this;
 }
