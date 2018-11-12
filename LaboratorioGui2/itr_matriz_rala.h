@@ -91,12 +91,11 @@ itr_matriz_rala< T >& itr_matriz_rala< T >::operator++() {
 template < typename T >
 bool itr_matriz_rala< T >::operator==(const itr_matriz_rala< T >& orig) const {
     if( p_elem_act && orig.p_elem_act )
-        return (p_elem_act->c == orig.p_elem_act->c) && (p_elem_act->v == orig.p_elem_act->v);
+        return (mr == orig.mr) && (f_act == orig.f_act) && (c_act == orig.c_act) && (p_elem_act == orig.p_elem_act);
     else if( !p_elem_act && !orig.p_elem_act )
         return true;
     else
         return false;
-    //return &(p_elem_act->v) == &(p_elem_act->v);
 }
 
 template < typename T >

@@ -1,3 +1,2 @@
 ﻿Razón de ser de los iteradores estáticos en la matriz.
-Comparaciones de operator== en iterador.
 Se puede const_iterator en matriz_rala::begin() y matriz_rala::end()?
